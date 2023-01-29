@@ -31,7 +31,7 @@ public class ReservationServiceImpl implements ReservationService {
             List<Spot> spotList = parkingLot.getSpotList();
             boolean spotBooked=false;
             for(Spot spot:spotList){
-                if(!spot.isOccupied()){
+                if(!spot.getOccupied()){
                     spotBooked=true;
                     break;
                 }
@@ -57,7 +57,7 @@ public class ReservationServiceImpl implements ReservationService {
 
             for(Spot spot:spotList){
                 if(spotType.equals(SpotType.OTHERS) && spot.getSpotType().equals(SpotType.OTHERS)){
-                    if(spot.getPricePerHour()*timeInHours < minimumPrice && !spot.isOccupied()){
+                    if(spot.getPricePerHour()*timeInHours < minimumPrice && !spot.getOccupied()){
                         minimumPrice=spot.getPricePerHour()*timeInHours;
                         spotBooked=true;
                         requiredSpot=spot;
@@ -65,14 +65,14 @@ public class ReservationServiceImpl implements ReservationService {
                 }
                 else if (spotType.equals(SpotType.FOUR_WHEELER) && spot.getSpotType().equals(SpotType.OTHERS)||
                         spot.getSpotType().equals(SpotType.FOUR_WHEELER) ) {
-                    if(spot.getPricePerHour()*timeInHours<minimumPrice && !spot.isOccupied()){
+                    if(spot.getPricePerHour()*timeInHours<minimumPrice && !spot.getOccupied()){
                         minimumPrice=spot.getPricePerHour()*timeInHours;
                         spotBooked=true;
                         requiredSpot=spot;
                     }
                 } else if (spotType.equals(SpotType.TWO_WHEELER) && spot.getSpotType().equals(SpotType.OTHERS) ||
                         spot.getSpotType().equals(SpotType.FOUR_WHEELER) || spot.getSpotType().equals(SpotType.OTHERS)) {
-                    if(spot.getPricePerHour()*timeInHours<minimumPrice && !spot.isOccupied()){
+                    if(spot.getPricePerHour()*timeInHours<minimumPrice && !spot.getOccupied()){
                         minimumPrice=spot.getPricePerHour()*timeInHours;
                         spotBooked=true;
                         requiredSpot=spot;
